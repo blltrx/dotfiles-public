@@ -1,0 +1,53 @@
+[[language]]
+name="markdown"
+language-servers = ["marksman", "typos"]
+
+[[language]]
+name="typst"
+language-servers = ["tinymist", "typos"]
+
+[[language]]
+name = "python"
+language-servers = [ "pyright", "ruff" ]
+
+[[language]]
+name = "latex"
+scope = "source.tex"
+injection-regex = "tex"
+file-types = ["tex"]
+comment-token = "%"
+language-servers = ["texlab"]
+
+
+[language-server.typos]
+command="typos-lsp"
+config.config = "~/.config/helix/lspconf/typos.toml"
+config.diagnosticSeverity = "Info" # Info, Hint, Error, or Warning
+
+[language-server.marksman]
+command="marksman"
+
+
+[language-server.tinymist]
+command = "tinymist"
+config = { exportPdf = "onType", formatterMode = "typstyle", onEnterEvent = true }
+
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+[language-server.ruff]
+command = "ruff-lsp"
+config.settings.args = ["--ignore", "E501"]
+
+[language-server.texlab]
+command = "texlab"
+indent = { tab-width = 4, unit = "\t" }
+
+[language-server.texlab.config.texlab]
+build.executable = "latexmk"
+build.args = ["-auxdir=build", "-pdf", "-pvc"]
+build.onSave = true
+chktex = { onOpenAndSave = true, onEdit = true }
+build.forwardSearchAfter = true
+build.forwardSearch.executable = "zatura"

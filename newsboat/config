@@ -1,0 +1,8 @@
+auto-reload yes
+# include ~/.config/newsboat/inkpot.theme # my default
+# include ~/.config/newsboat/commander.theme # bright as fuck
+include ~/.config/newsboat/gruvbox.theme # highlights unread
+browser "xdg-open %u"
+download-path "~/Documents/media/music/podboat/"
+download-filename-format "%b-%t.%e"
+player "ffplay -v 0 -nodisp"

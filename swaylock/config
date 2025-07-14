@@ -1,0 +1,7 @@
+show-keyboard-layout
+image=$HOME/.config/wallpapers/arch.png
+indicator-thickness=3
+indicator-radius=50
+line-uses-inside
+ring-color=f2affd
+inner-color=24acd4

@@ -1,0 +1,59 @@
+theme = "dracula"
+
+[editor]
+line-number = "relative"
+bufferline = "multiple"
+true-color = true
+text-width = 120
+end-of-line-diagnostics = "hint"
+
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control"]
+center = ["file-name", "read-only-indicator", "file-modification-indicator"]
+right = ["diagnostics", "selections", "register", "position", "file-encoding", "position-percentage"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+display-progress-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+select = "hidden"
+
+[editor.file-picker]
+hidden = true # true = hide hidden files
+git-ignore = true
+max-depth = 4 
+
+[keys.normal]
+# nvim-like buffer navigation
+tab = ":buffer-next"
+S-tab = ":buffer-previous"
+space.x = ":buffer-close"
+
+# swapping file picker mapping
+space.f = "file_picker_in_current_directory"
+space.F = "file_picker"
+
+ret = ["move_line_down", "goto_first_nonwhitespace"]
+backspace = "move_line_up"
+X = "extend_line_above"
+
+# nvim-like command mapping
+";" = "command_mode"
+
+[keys.insert]
+# navigation in insert mode
+C-i = "kill_to_line_start"
+C-h = "move_char_left"
+C-j = "move_line_down"
+C-k = "move_line_up"
+C-l = "move_char_right"

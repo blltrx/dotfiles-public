@@ -1,0 +1,32 @@
+use_nerdfont=true
+flip_status_indicators=true
+notify=true
+volnorm=true
+command_key=";"
+
+[theme]
+background = "#282A36"
+primary = "#F2AFFD"
+secondary = "#24ACD4"
+title = "#24ACD4"
+playing = "#24ACD4"
+playing_selected = "#F2AFFD"
+playing_bg = "#282A36"
+highlight = "#white"
+highlight_bg = "#705175"
+error = "#FFE4E4"
+error_bg = "#A50000"
+statusbar = "#1B1B1D"
+statusbar_progress = "#24ACD4"
+statusbar_bg = "#F2AFFD"
+cmdline = "#CBFFDE"
+cmdline_bg = "#1B1B1D"
+
+[track_format]
+left = "%title"
+center = "%artists"
+right = "%saved"
+
+[notification_format]
+title = "%duration | %title"
+body = "%artists - %album"
