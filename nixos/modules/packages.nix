@@ -3,14 +3,10 @@
 let
   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in {
-    # REDACTED
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   
-  # XDG desktop portal
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
-  xdg.portal.config.common.default = [ "gtk" "wlr" ];
-
+  ...
   # Configurable packages
   programs = {
     sway = {
@@ -20,6 +16,7 @@ in {
         swaylock
         swayidle
         wl-clipboard
+        waybar
         wl-mirror
         pipectl
         # wf-recorder
@@ -28,6 +25,7 @@ in {
         slurp
         kitty
         fuzzel
+        libnotify
       ];
       extraSessionCommands = ''
         export SDL_VIDEODRIVER=wayland
@@ -97,7 +95,6 @@ in {
       enableVirtualCamera = true;
       plugins = [ pkgs.obs-studio-plugins.wlrobs ];
     };
-    waybar.enable = true;
     zoxide = {
       enable = true;
       enableFishIntegration = true;
@@ -127,6 +124,67 @@ in {
 
   # Misc Packages
   environment.systemPackages = with pkgs; [
-    # REDACTED
+    # ungoogled-chromium
+    adwaita-icon-theme
+    any-nix-shell
+    art
+    beeper
+    bluetuith
+    btop
+    cargo-mommy
+    chezmoi
+    cloudflared
+    discord
+    exiftool
+    eza
+    fastfetch
+    feh
+    framework-tool
+    fzf
+    gimp3
+    gitui
+    glow
+    gnome-characters
+    helix
+    indicator-application-gtk3
+    kew
+    libreoffice
+    mediainfo
+    mpv
+    muse-sounds-manager
+    musescore
+    ncdu
+    ncspot
+    neofetch
+    newsboat
+    nmap
+    playerctl
+    prismlauncher
+    pulseaudio
+    pulsemixer
+    pyright
+    python313Packages.bpython
+    qrrs
+    rclone
+    ripgrep
+    rust-analyzer
+    signal-desktop
+    snapshot
+    spotify
+    starship
+    tinymist
+    typos-lsp
+    typst
+    udiskie
+    udisks
+    unison
+    wget
+    xwayland
+    yaru-theme
+    yazi
+    yt-dlp
+    zathura
+    zellij
+    zip unzip
   ];
 }
