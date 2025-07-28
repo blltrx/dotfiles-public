@@ -14,7 +14,7 @@
       system = "x86_64-linux";
       modules = [
         ./hardware-configuration.nix
-        ./teal/default.nix
+        ./teal
         ## Secure Boot Configuration
         lanzaboote.nixosModules.lanzaboote
       ];
@@ -23,7 +23,7 @@
       system = "x86_64-linux";
       modules = [
         ./hardware-configuration.nix
-        ./ranger/default.nix
+        ./ranger
         ## Secure Boot Configuration
         lanzaboote.nixosModules.lanzaboote
       ];
