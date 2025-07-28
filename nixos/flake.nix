@@ -7,32 +7,27 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    izrss.url = "github:isabelroses/izrss";
   };
 
-  outputs = { self, nixpkgs, lanzaboote, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
+
     nixosConfigurations.teal = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-        ./hardware-configuration.nix
-        ./teal
-        ## Secure Boot Configuration
-        lanzaboote.nixosModules.lanzaboote
-      ];
+      specialArgs = { inherit inputs; };
+      modules = [ ./teal ];
     };
+
     nixosConfigurations.ranger = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-        ./hardware-configuration.nix
-        ./ranger
-        ## Secure Boot Configuration
-        lanzaboote.nixosModules.lanzaboote
-      ];
+      specialArgs = { inherit inputs; };
+      modules = [ ./ranger ];
     };
+
     nixosConfiguration.goose = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules =[
-        # todo
-      ];
+      specialArgs = { inherit inputs; };
+      # modules = [ ./goose ]; todo
     };
   };
 }
