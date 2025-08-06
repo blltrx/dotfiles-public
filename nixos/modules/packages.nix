@@ -1,86 +1,49 @@
-{ config, pkgs, ... }:
+{ pkgs, inputs, ... }:
 
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in {
+{
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  
-  ...
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = [ "gtk" "hyprland" "wlr" ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+  };
+
   # Configurable packages
   programs = {
     sway = {
       enable = true;
       wrapperFeatures.gtk = true; # so that gtk works properly
       extraPackages = with pkgs; [
-        swaylock
-        swayidle
-        wl-clipboard
-        waybar
-        wl-mirror
-        pipectl
-        # wf-recorder
-        mako # notification daemon
-        grim
-        slurp
-        kitty
         fuzzel
+        grim
+        kitty
         libnotify
+        mako
+        pipectl
+        slurp
+        swayidle
+        swaylock
+        waybar
+        wl-clipboard
+        wl-mirror
       ];
       extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-        export _JAVA_AWT_WM_NONREPARENTING=1
         export MOZ_ENABLE_WAYLAND=1
+        export NIXOS_OZONE_WL=1
+        export QT_QPA_PLATFORM=wayland
+        export QT_QPA_PLATFORM=wayland;xcb
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export SDL_VIDEODRIVER=wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
       '';
     };
-    light = {
-      enable = true;
-      brightnessKeys.enable = false;
-    };
-    fish.enable = true;
-    starship = {
-      enable = true;
-      transientPrompt.enable = true;
-      transientPrompt.right = "starship module time";
-      transientPrompt.left = "starship module character";
-      settings = {
-        add_newline = true;
-        format= "$all";
-        right_format="$conda$cmd_duration";
-        continuation_prompt = "--> ";
-        character.success_symbol = "[->](bold green)";
-        character.error_symbol = "[->](bold red)";
-        conda.ignore_base = true;
-        cmd_duration.min_time=10000;
-        localip = {
-          ssh_only = true;
-          disabled = false;
-        };
-        directory = {
-          read_only = " 󰌾";
-          style = "bold #F2AFFD";
-        };
-        git_status = {
-          modified = "~";
-          style = "bold #F2AFFD ";
-        };
-        username = {
-          show_always = true;
-          format = "[$ssh_symbol$user]($style)@";
-          style_user = "#24ACD4";
-        };
-        hostname = {
-          ssh_symbol = " ";
-          ssh_only = false;
-          format = "[$hostname $ssh_symbol]($style)";
-          style = "#F2AFFD bold";
-        };
-      };
-    };
-    # droidcam.enable = true;
-    firefox.enable = true;
+    starship = builtins.fromTOML (builtins.readFile config/starship.toml);
     git = {
       enable = true;
       config = {
@@ -95,16 +58,10 @@ in {
       enableVirtualCamera = true;
       plugins = [ pkgs.obs-studio-plugins.wlrobs ];
     };
-    zoxide = {
+    wireshark = {
       enable = true;
-      enableFishIntegration = true;
+      usbmon.enable = true;
     };
-    bat.enable = true;
-    # wireshark = {
-    #   enable = true;
-    #   dumpcap.enable = true;
-    #   usbmon.enable = true;
-    # };
     steam = {
       enable = true;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
@@ -112,8 +69,14 @@ in {
       localNetworkGameTransfers.openFirewall = true;
       protontricks.enable = true;
     };
+    bat.enable = true;
+    droidcam.enable = true;
+    firefox.enable = true;
+    fish.enable = true;
+    light.enable = true;
+    zoxide.enable = true;
   };
-
+  
   # Fonts
   fonts.packages = with pkgs; [
       nerd-fonts.caskaydia-cove
@@ -124,14 +87,12 @@ in {
 
   # Misc Packages
   environment.systemPackages = with pkgs; [
-    # ungoogled-chromium
     adwaita-icon-theme
     any-nix-shell
     art
     beeper
     bluetuith
     btop
-    cargo-mommy
     chezmoi
     cloudflared
     discord
@@ -147,6 +108,7 @@ in {
     gnome-characters
     helix
     indicator-application-gtk3
+    inputs.izrss.packages."${pkgs.system}".default
     kew
     libreoffice
     mediainfo
@@ -155,8 +117,8 @@ in {
     musescore
     ncdu
     ncspot
-    neofetch
     newsboat
+    nil
     nmap
     playerctl
     prismlauncher
@@ -167,7 +129,7 @@ in {
     qrrs
     rclone
     ripgrep
-    rust-analyzer
+    shotcut
     signal-desktop
     snapshot
     spotify

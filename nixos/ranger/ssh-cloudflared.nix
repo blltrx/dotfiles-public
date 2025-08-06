@@ -2,21 +2,21 @@
 {
   programs.ssh.startAgent = true;
   services = { 
-    fail2ban.enable = true;
+  fail2ban.enable = true;
     openssh = {
       enable = true;
       ports = [ 2323 ];
-      banner = "haii (=^ • ^=)\n";
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
       };
+  
     };
     cloudflared = {
       enable = true;
       tunnels = {
-        ${vars.cloudflared.tunnelTeal} = {
-          credentialsFile = "/home/blltrx/.cloudflared/${vars.cloudflared.tunnelTeal}.json";
+        ${vars.cloudflared.tunnelRanger} = {
+          credentialsFile = "/home/blltrx/.cloudflared/${vars.cloudflared.tunnelRanger}.json";
           default = "http_status:404";
         };
       };

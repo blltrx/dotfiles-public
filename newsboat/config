@@ -1,4 +1,6 @@
 auto-reload yes
+suppress-first-reload yes
+reload-time 30
 # include ~/.config/newsboat/inkpot.theme # my default
 # include ~/.config/newsboat/commander.theme # bright as fuck
 include ~/.config/newsboat/gruvbox.theme # highlights unread
@@ -6,3 +8,11 @@ browser "xdg-open %u"
 download-path "~/Documents/media/music/podboat/"
 download-filename-format "%b-%t.%e"
 player "ffplay -v 0 -nodisp"
+cleanup-on-quit yes
+always-display-description yes
+confirm-mark-feed-read no
+notify-always yes
+notify-beep yes
+show-keymap-hint no
+show-title-bar no
+show-read-feeds yes

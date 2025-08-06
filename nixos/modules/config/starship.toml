@@ -1,0 +1,38 @@
+enable = true
+transientPrompt.enable = true
+transientPrompt.right = "starship module time"
+transientPrompt.left = "starship module character"
+
+[settings]
+add_newline = true
+format= "$all"
+right_format="$conda$cmd_duration"
+continuation_prompt = "--> "
+character.success_symbol = "[->](bold green)"
+character.error_symbol = "[->](bold red)"
+conda.ignore_base = true
+cmd_duration.min_time=10000
+
+[settings.localip]
+ssh_only = true
+disabled = false
+
+[settings.directory]
+read_only = " 󰌾"
+style = "bold #F2AFFD"
+
+[settings.git_status]
+modified = "~"
+style = "bold #F2AFFD "
+
+[settings.username]
+show_always = true
+format = "[$ssh_symbol$user]($style)@"
+style_user = "#24ACD4"
+
+[settings.hostname]
+ssh_symbol = " "
+ssh_only = false
+format = "[$hostname $ssh_symbol]($style)"
+style = "#F2AFFD bold"
+

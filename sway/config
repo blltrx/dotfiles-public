@@ -223,16 +223,16 @@ bindsym $mod+r mode "resize"
 
 # Cursor size 
 seat seat0 xcursor_theme Adwaita 24
-# Waybar should be done by nix
-# bar swaybar_command waybar
+# waybar
+bar swaybar_command waybar
 # Automount disks
-exec udiskie -sA --appindicator
+exec_always udiskie -sA --appindicator
 # mouse warps to window in focus
 mouse_warping container
 # make (most) windows transparent
-exec $HOME/.config/scripts/transcript/run.py
+exec_always $HOME/.config/scripts/transcript/run.py
 # sleep!
-exec swayidle -w \
+exec_always swayidle -w \
      timeout 300 'swaylock -f -c 000000' \
      timeout 400 'swaymsg "output * dpms off"' \
           resume 'swaymsg "output * dpms on"' \
