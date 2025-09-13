@@ -9,6 +9,7 @@ if status is-interactive
     abbr -a todo todoist-rs
     abbr -a zj zellij
     abbr -a c clear
+    abbr -a nm nmcli
     abbr -a spotify ncspot
     abbr -a typstsync "unison notes-sync -batch"
     abbr -a exip "curl https://ipv4.myexternalip.com/raw"
@@ -16,9 +17,8 @@ if status is-interactive
     abbr -a pkgsearch "nix search nixpkgs"
     abbr -a code "nix develop --command 'zellij'"
     abbr -a wifi "iwctl station wlan0"
-
-    abbr -a vim helix
-    abbr -a hf hyfetch
+    abbr -a rmexif "exiftool -all:all="
+    abbr -a nixos-rebuild "sudo nixos-rebuild switch --flake ~/.config/nixos#(hostname)"
 
     if status is-login
         exec bash -c "test -e /etc/profile && source /etc/profile

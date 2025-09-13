@@ -60,6 +60,9 @@ output 'Dell Inc. DELL U2414H 292K471U0HCL' {
     pos 1611 0
 }
 
+# sit
+output 'HKC OVERSEAS LIMITED 24N1A 0000000000001' res 1920x1080 pos -1920 0
+
 # laidlaw monitors
 output 'Dell Inc. DELL U3223QE GMY7J04' scale 1.5 res 3840x2160
 output 'Dell Inc. DELL U3223QE FPY7J04' scale 1.5 res 3840x2160
@@ -203,34 +206,33 @@ mode "resize" {
     bindsym $mod+r mode "default"
 }
 
-mode "present" {
-    # command starts mirroring
+mode "command" {
+    # start mirroring
     bindsym n mode "default"; exec "wl-present mirror && wl-present fullscreen"
     # these commands modify an already running mirroring window
-    bindsym o mode "default"; exec wl-present set-output
-    bindsym r mode "default"; exec wl-present set-region
-    bindsym Shift+r mode "default"; exec wl-present unset-region
-    bindsym s mode "default"; exec wl-present set-scaling
-    bindsym f mode "default"; exec wl-present toggle-freeze
-    bindsym c mode "default"; exec wl-present custom
+    # bindsym o mode "default"; exec wl-present set-output
+    # bindsym r mode "default"; exec wl-present set-region
+    # bindsym Shift+r mode "default"; exec wl-present unset-region
+    # bindsym s mode "default"; exec wl-present set-scaling
+    # bindsym f mode "default"; exec wl-present toggle-freeze
+    # bindsym c mode "default"; exec wl-present custom
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "present"
+bindsym $mod+p mode "command"
 bindsym $mod+r mode "resize"
 
 # Cursor size 
 seat seat0 xcursor_theme Adwaita 24
 # waybar
 bar swaybar_command waybar
-# Automount disks
-exec_always udiskie -sA --appindicator
 # mouse warps to window in focus
 mouse_warping container
 # make (most) windows transparent
 exec_always $HOME/.config/scripts/transcript/run.py
+exec protonvpn-app
 # sleep!
 exec_always swayidle -w \
      timeout 300 'swaylock -f -c 000000' \
