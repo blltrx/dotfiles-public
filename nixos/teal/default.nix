@@ -2,8 +2,12 @@
 
 {
   imports = [
+    # ./wireguard.nix
     ../modules/base.nix
     ../modules/desktop.nix
+    ../modules/kanata.nix
+    ../modules/packages.nix
+    ../modules/secureboot.nix
     ./hardware-configuration.nix
     ./ssh-cloudflared.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd

@@ -2,26 +2,26 @@
 
 {
   imports = [
-    ../modules/base.nix
-    ../modules/serve.nix ## TODO
+    "${inputs.nix-mineral}/nix-mineral.nix"
     ../modules/backup-service.nix
+    ../modules/base.nix
+    ../modules/kanata.nix
+    # ../modules/secureboot.nix
+    ../modules/serve.nix
+    # ../modules/wireguard.nix
     ./hardware-configuration.nix
     ./packages.nix
     ./ssh-cloudflared.nix
-    "${inputs.nix-mineral}/nix-mineral.nix"
   ];
+  networking.enableIPv6 = true; # to disable ipv6 when docker needs upgrading
   
+  # ...
+  
+  swapDevices = [{ device = "/dev/mapper/Main-swap"; }];
+
   networking.hostName = "goose";
-  users.users.blltrx.extraGroups = [ "networkmanager" "wheel" "video" "dialout" "wireshark" "jellyfin" "immich" "seafile" ];
- 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      libvdpau-va-gl
-    ];  
-  };
+
+  # ... 
   
   security.sudo.execWheelOnly = true;
   security.auditd.enable = true;
@@ -30,7 +30,6 @@
     "-a exit,always -F arch=b64 -S execve"
   ];
 
-  nix.settings.allowed-users = [ " root " ];
   
   system.autoUpgrade = {
     enable = true;

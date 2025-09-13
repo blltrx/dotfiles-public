@@ -1,13 +1,5 @@
 { pkgs, vars, ... }:
 {
-  imports = [
-    ../modules/packages.nix
-    ../modules/kanata.nix
-    ../modules/wireguard.nix
-    ../modules/cargo-alt.nix
-    ../modules/yubico.nix
-  ];
-
   powerManagement.enable = true;
   swapDevices = [{
       device = "/var/lib/swapfile";
@@ -27,6 +19,12 @@
       };
     };
   };
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [
+    # Add any missing dynamic libraries for unpackaged 
+    # programs here, NOT in environment.systemPackages
+  ];
 
   services = {
     printing.enable = true;

@@ -1,9 +1,6 @@
 { pkgs, lib, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
-  
   # Configurable packages
   programs = {
     git = {
@@ -25,6 +22,7 @@
   environment.defaultPackages = lib.mkForce [];
   environment.systemPackages = with pkgs; [
     any-nix-shell
+    borgbackup
     btop
     chezmoi
     cloudflared
@@ -36,11 +34,11 @@
     helix
     mediainfo
     ncdu
+    nil
     rclone
     ripgrep
     rsync
     starship
-    udiskie
     udisks
     unison
     vulnix
